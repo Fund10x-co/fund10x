@@ -1,0 +1,98 @@
+.alert-modal .alert-modal-card {
+  width: 400px;
+}
+
+.alert-modal-card .close-alert-button {
+  margin-left: -10px;
+  border-bottom: none !important;
+  /* padding-bottom: 12px; */
+}
+
+.alert-modal-body p {
+  font-size: 1.2rem;
+}
+
+.alert-modal .form_input {
+  width: 100%;
+  height: 50px;
+  display: block;
+  border: 1px solid #ced4ed;
+  text-align: left;
+  background: #f1f1f1 !important;
+  border-radius: 16.2104px;
+  margin: 11.2226px 0px;
+  padding: 0px 14px;
+  transition: all 300ms ease-in-out;
+  font-size: 17px;
+}
+
+.alert-modal .form_input:focus {
+  outline: none;
+  padding: 0px 19px;
+}
+
+#reportIssueModal .alert-modal-card {
+  width: 500px;
+}
+
+#reportIssueModal .alert-modal-body {
+  height: 580px;
+}
+
+#reportIssueModal .alert-modal-button {
+  width: 60%;
+  margin: 42px auto 10px;
+}
+
+@media screen and (max-width: 580px) {
+  #reportIssueModal.large_modal .alert-modal-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px;
+  }
+
+  #reportIssueModal.large_modal .alert-modal-body {
+    padding-bottom: 70px;
+    height: 100%;
+    display: block;
+  }
+
+  #reportIssueModal .alert-modal-button {
+    width: 95%;
+    margin: 42px auto 10px;
+  }
+
+  #reportIssueModal .alert-modal-button button {
+    height: 50px;
+  }
+
+  .verifypinModal .alert-modal-card {
+    position: fixed !important;
+    width: 100% !important;
+    height: calc(100vh - 216px);
+    bottom: 0px;
+    overflow-y: scroll;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-bottom: 40px;
+  }
+
+  .verifypinModal.verifypinLoginModal .alert-modal-card {
+    height: calc(100vh - 346px);
+  }
+
+  .verifypinModal .instructionMessageInputCodes {
+    width: 96%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  .verifypinModal .instructionMessageInputCodes input {
+    width: 51px;
+    margin: 0px;
+  }
+}

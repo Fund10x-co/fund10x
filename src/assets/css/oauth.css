@@ -1,0 +1,183 @@
+/*! fasta.css | Fasta | Victor Nwakwue */
+
+/*! Fasta | 5.0 | Victor Nwakwue */
+.auth-wrapper {
+  width: 100%;
+  height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  text-align: center;
+  box-sizing: border-box;
+  background: #fff;
+  /* background: linear-gradient(149deg, #ecfcec 18.01%, #e2f1f8 91.58%); */
+  overflow-y: scroll;
+}
+
+.auth_logo {
+  width: 106px;
+  height: auto;
+  position: relative;
+}
+
+.auth_logo img {
+  width: 100%;
+  height: auto;
+}
+
+.auth_logo span {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+  color: #000000;
+  display: block;
+  margin-top: -10px;
+  margin-left: 45px;
+  text-align: left;
+}
+
+.auth_body {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.auth_body_title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.auth_body_para {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17.8314px;
+  line-height: 24px;
+  color: #313131;
+  margin-top: 20px;
+}
+
+.auth_form {
+  width: 350px;
+  margin: 40px auto 40px;
+}
+
+.auth_form ::placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14.0905px;
+  line-height: 19px;
+  color: #c4c4c4;
+}
+
+.auth_form label {
+  display: block;
+  text-align: left;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17.4573px;
+  line-height: 24px;
+  color: #313131;
+}
+
+.password_div {
+  width: 100%;
+  position: relative;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.form_input {
+  width: 100%;
+  height: 50px;
+  display: block;
+  border: none;
+  text-align: left;
+  background: #f1f1f1;
+  border-radius: 10px;
+  margin: 11.2226px 0px;
+  padding: 0px 14px;
+  transition: all 300ms ease-in-out;
+  font-size: 17px;
+}
+
+.form_input:focus {
+  outline: none;
+  padding: 0px 19px;
+}
+
+.has_link {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #313131;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.has_link_a {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  color: #313131;
+  text-decoration: none;
+}
+
+.has_link_ag {
+  color: var(--mainPrimary);
+}
+
+.has_link:hover {
+  color: var(--mainPrimary);
+}
+
+.inputError {
+  color: red !important;
+  font-size: 13px !important;
+  margin-bottom: 28px;
+  text-align: left !important;
+}
+
+.inputError svg {
+  color: red !important;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 580px) {
+  .auth-wrapper {
+    padding-top: 35px;
+    height: 100vh !important;
+    overflow-y: scroll !important;
+    /* padding-bottom: 95px !important; */
+  }
+
+  .auth_logo {
+    width: 120px;
+    height: 64px;
+  }
+  .auth_body_title {
+    font-size: 26.5357px;
+  }
+
+  .auth_form {
+    width: 90%;
+    margin: 80px auto 40px;
+  }
+
+  .form_input {
+    height: 60px;
+  }
+}
