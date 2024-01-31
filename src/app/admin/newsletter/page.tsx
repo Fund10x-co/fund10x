@@ -1,4 +1,3 @@
-import Searchfilters from "@/components/Searchfilters";
 import Pageheader from "@/components/header/Pageheader";
 import NewsletterTable from "@/components/tables/newsletter/NewsletterTable";
 import Link from "next/link";
@@ -27,11 +26,7 @@ const Newsletter = () => {
           </div>
         </div>
 
-        <Searchfilters />
         <NewsletterTable />
-        <div className="mt-5">
-          <Searchfilters />
-        </div>
       </div>
     </div>
   );
