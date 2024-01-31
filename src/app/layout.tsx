@@ -8,7 +8,6 @@ import "../assets/css/modal.css";
 import "../assets/css/main.css";
 import "../assets/css/custom.css";
 import "../assets/css/modern.css";
-import Head from "next/head";
 import { Providers } from "@/store/provider";
 import AllModals from "@/modals/AllModals";
 

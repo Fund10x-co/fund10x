@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { validEmail } from "@/utils/helpers/customFunctions";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BiShow } from "react-icons/bi";
 import { useRouter, redirect } from "next/navigation";
@@ -13,10 +11,8 @@ import {
   setPageLoading,
   setVerifyPopUp,
 } from "@/store/alertSlice/alertSlice";
-import { handleAxiosPOSTRequest } from "@/utils/helpers/httpRequest";
 import { REQUEST_LOGIN_TOKEN_URL } from "@/utils/config/urlConfigs";
 import axiosInstance from "@/utils/config/axios";
-import { loginResponseType } from "@/types/axiosTypes";
 
 const LoginForm = () => {
   const dispatch = useDispatch<AppDispatch>();

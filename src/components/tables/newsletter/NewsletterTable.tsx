@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import NewsletterTableRow from "./NewsletterTableRow";
 import { Investors } from "@/types/tableTypes";
-import TablePagination from "@/components/paginations/TablePagination";
 import NewsletterTableRowSmall from "./NewsletterTableRowSmall";
 
 const NewsletterTable = () => {
@@ -168,9 +167,9 @@ const NewsletterTable = () => {
           />
         ))}
 
-        <div className="mt-5">
+        {/* <div className="mt-5">
           <TablePagination />
-        </div>
+        </div> */}
 
         {allInvestors && allInvestors.length <= 0 && (
           <div className="error_table">

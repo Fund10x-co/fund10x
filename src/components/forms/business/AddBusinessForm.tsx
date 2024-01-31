@@ -9,7 +9,7 @@ import { axiosAuth } from "@/utils/config/axios";
 import { GET_BUSINESS_URL } from "@/utils/config/urlConfigs";
 import { validEmail } from "@/utils/helpers/customFunctions";
 import { getBusiness } from "@/store/businessSlice/actions";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FullPageLoading from "@/components/loading/FullPageLoading";
 import { UserAppType } from "@/types/oauthTypes";
 import { businessType } from "@/types/types";

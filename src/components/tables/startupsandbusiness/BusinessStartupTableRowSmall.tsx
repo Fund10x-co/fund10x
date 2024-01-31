@@ -1,6 +1,5 @@
 import { setConfirmPopUp } from "@/store/alertSlice/alertSlice";
 import { AppDispatch } from "@/store/store";
-import { Investors } from "@/types/tableTypes";
 import { businessType } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React from "react";

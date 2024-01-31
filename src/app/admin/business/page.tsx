@@ -1,11 +1,8 @@
 "use client";
-import Searchfilters from "@/components/Searchfilters";
 import Pageheader from "@/components/header/Pageheader";
 import BusinessStartupTable from "@/components/tables/startupsandbusiness/BusinessStartupTable";
 import { getBusiness } from "@/store/businessSlice/actions";
 import { AppDispatch, RootState } from "@/store/store";
-import { GET_BUSINESS_URL } from "@/utils/config/urlConfigs";
-import useAxiosWithAuth from "@/utils/hooks/useAxiosAuth";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
