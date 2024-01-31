@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import InvestorTableRow from "./InvestorTableRow";
-import { Investors } from "@/types/tableTypes";
-import TablePagination from "@/components/paginations/TablePagination";
 import InvestorTableRowSmall from "./InvestorTableRowSmall";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";

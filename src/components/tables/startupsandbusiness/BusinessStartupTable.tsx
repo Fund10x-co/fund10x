@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import BusinessStartupTableRow from "./BusinessStartupTableRow";
-import { Investors } from "@/types/tableTypes";
-import TablePagination from "@/components/paginations/TablePagination";
 import BusinessStartupTableRowSmall from "./BusinessStartupTableRowSmall";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
@@ -194,38 +192,6 @@ const BusinessStartupTable = () => {
         })
       );
     }
-
-    dispatch(
-      setPageLoading({
-        status: false,
-        message: "",
-      })
-    );
-  };
-
-  const convertToFile = async (data: any, value: any) => {
-    let RequestUrl =
-      value === "pdf"
-        ? "/api/convert/pdf"
-        : value === "csv"
-        ? "/api/convert/csv"
-        : "/api/convert/excel";
-
-    const response = await fetch(RequestUrl, {
-      method: "POST",
-      body: JSON.stringify({ data }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `data.${value}`;
-    a.click();
-    window.URL.revokeObjectURL(url);
 
     dispatch(
       setPageLoading({
