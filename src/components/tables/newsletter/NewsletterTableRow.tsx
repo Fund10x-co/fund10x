@@ -1,10 +1,12 @@
-import { Investors } from "@/types/tableTypes";
+import { newsletterType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
+import ActionButton from "./ActionButton";
+import { removeFormatDate } from "@/utils/helpers/globalFunc";
 
 interface Props {
   index: number;
-  item: Investors;
+  item: newsletterType;
   // addCheckboxItems: () => {};
 }
 const NewsletterTableRow = ({ index, item }: Props) => {
@@ -12,7 +14,6 @@ const NewsletterTableRow = ({ index, item }: Props) => {
     <tr>
       <td style={{ whiteSpace: "unset" }} colSpan={4}>
         <div className="width_img">
-          <input type="checkbox" />
           <div>
             <div
               style={{
@@ -22,18 +23,29 @@ const NewsletterTableRow = ({ index, item }: Props) => {
                 paddingLeft: 10,
               }}
             >
-              <Image
-                property={"false"}
-                src={require("@/assets/img/default.png")}
-                alt=""
-              />
+              {item?.imageUrl ? (
+                <Image
+                  property={"false"}
+                  src={item?.imageUrl}
+                  alt=""
+                  width={72}
+                  height={72}
+                />
+              ) : (
+                <Image
+                  property={"false"}
+                  src={require("@/assets/img/default.png")}
+                  alt=""
+                  width={72}
+                  height={72}
+                />
+              )}
+
               <div
                 className="tableDiv"
                 style={{ position: "relative", display: "block" }}
               >
-                <p style={{ fontSize: 18, fontWeight: 700 }}>
-                  Investment Update
-                </p>
+                <p style={{ fontSize: 18, fontWeight: 700 }}>{item?.title}</p>
                 <div
                   style={{
                     overflowWrap: "break-word",
@@ -43,9 +55,7 @@ const NewsletterTableRow = ({ index, item }: Props) => {
                     fontWeight: 300,
                   }}
                 >
-                  vamus. Consequat vel libero facilisis luctus enim pellentesque
-                  mauris. Vestibulum malesuada gravida egestas in molestie sed.
-                  Etiam viverra volutpat fames vulputate in tellus sit mauris.
+                  {item?.description}
                 </div>
               </div>
             </div>
@@ -53,8 +63,13 @@ const NewsletterTableRow = ({ index, item }: Props) => {
         </div>
       </td>
       <td>
-        <div style={{ textAlign: "center" }}>
-          <p style={{ fontWeight: 400 }}>10/11/2023</p>
+        <div style={{ marginTop: 20, textAlign: "center" }}>
+          {item?.audience}
+        </div>
+      </td>
+      <td>
+        {/* <div style={{ textAlign: "center" }}>
+          
           <div style={{ width: 200 }}>
             <button
               type="button"
@@ -63,9 +78,30 @@ const NewsletterTableRow = ({ index, item }: Props) => {
               <span>Investor</span>
             </button>
           </div>
+        </div> */}
+        <div style={{ marginTop: 13, textAlign: "center" }}>
+          <p
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {removeFormatDate(item.createdAt)}
+          </p>
+          <p
+            style={{
+              textAlign: "center",
+            }}
+            className={`isNormal ${item?.sent ? "isSent" : ""}`}
+          >
+            {item?.sent ? "Sent" : "Not sent"}
+          </p>
         </div>
       </td>
-      <td></td>
+      <td>
+        <div style={{ marginTop: 15 }}>
+          <ActionButton item={item} />
+        </div>
+      </td>
     </tr>
   );
 };

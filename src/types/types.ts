@@ -22,8 +22,22 @@ export type responseInvestorWithMeta = {
     nextPage: number | null;
   };
 };
+
 export type responseAdminWithMeta = {
   data: adminsType[];
+  error: boolean;
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+    prevPage: null;
+    nextPage: number | null;
+  };
+};
+
+export type responseNewsletterWithMeta = {
+  data: newsletterType[];
   error: boolean;
   meta: {
     page: number;
@@ -73,6 +87,21 @@ export type adminsType = {
   firstName: string;
   lastName: string;
   email: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type newsletterType = {
+  _id: string;
+  audience: string;
+  title: string;
+  description: string;
+  link: string;
+  textContent: any;
+  htmlContent: any;
+  imageUrl: string;
+  sent: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;

@@ -1,188 +1,201 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewsletterTableRow from "./NewsletterTableRow";
-import { Investors } from "@/types/tableTypes";
 import NewsletterTableRowSmall from "./NewsletterTableRowSmall";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { newsletterType } from "@/types/types";
+import TableLoading from "@/components/loading/TableLoading";
+import ErrorTable from "@/components/error/ErrorTable";
+import PaginationBlock from "@/components/paginations/PaginationBlock";
+import { getNewsletters } from "@/store/newsletterSlice/actions";
 
 const NewsletterTable = () => {
-  const [selectedItems, setSelectedItems] = useState<any>([]);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const addCheckboxItems = (value: any) => {
-    let alreadyAdded = selectedItems.find((items: any) => items === value);
-    if (alreadyAdded) {
-      setSelectedItems((allItems: any) =>
-        allItems.filter((oldItem: any) => oldItem !== value)
-      );
-    } else {
-      let newItem: any[] = [...selectedItems, value];
+  const {
+    newsletters,
+    newsletterLoading,
+    newsletterError,
+    newsletterCurrentPage: page,
+    newsletterTotalPages: totalPages,
+    newsletterNextPage: nextPage,
+    newsletterTotalData: totalData,
+  } = useSelector((state: RootState) => state.newsletter);
 
-      setSelectedItems(newItem);
+  const handleNext = () => {
+    if (page === totalPages) {
+      return;
     }
+    let currentPage = page + 1;
+
+    let query = `?page=${currentPage}&limit=${10}`;
+
+    dispatch(getNewsletters(query));
   };
 
-  const allInvestors: Investors[] = [
-    {
-      id: 1,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-    {
-      id: 2,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-    {
-      id: 3,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-    {
-      id: 4,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-    {
-      id: 5,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-    {
-      id: 6,
-      investorID: "HFJ786OP",
-      name: "Praise Williams",
-      email: "praise@creativnerd.com",
-      firmName: "Cre8tivnerd",
-      type: "Angel",
-      minInvestment: "$20,000 - $50,000",
-    },
-  ];
+  const handlePrev = () => {
+    if (page === 1) {
+      return;
+    }
+    let currentPage = page - 1;
+
+    let query = `?page=${currentPage}&limit=${10}`;
+
+    dispatch(getNewsletters(query));
+  };
+
+  const handleFetchByPage = (newPage: number) => {
+    if (page === newPage) {
+      return;
+    }
+
+    let query = `?page=${newPage}&limit=${10}`;
+
+    dispatch(getNewsletters(query));
+  };
+
+  // window.addEventListener("click", (e) => {
+  //   const dropDown = document.querySelector(".home_button_dropdown");
+  //   if (dropDown)
+  //     if (!e.composedPath().includes(dropDown)) handleCloseBulkFilter(false);
+  // });
 
   return (
     <div className="site-all-table">
-      <div className="site-large-table">
-        {/* {selectedItems} */}
-        <div className="site-table animate__animated animate__fadeInRight">
-          <div className="table-responsive">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th colSpan={4}>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        columnGap: 40,
-                        paddingLeft: 20,
-                      }}
-                    >
-                      {/* <input
-                                type="checkbox"
-                                onChange={() => addCheckboxItems(null)}
-                              /> */}
-                      <span></span>
+      {newsletterLoading ? (
+        <TableLoading />
+      ) : newsletterError?.status === true ? (
+        <ErrorTable requestType={"NEWSLETTER"} />
+      ) : (
+        <>
+          <div className="site-large-table">
+            {/* {selectedItems} */}
+            <div className="site-table animate__animated animate__fadeInRight">
+              <div className="table-responsive">
+                <table className="table mb-0">
+                  <thead>
+                    <tr>
+                      <th colSpan={4}>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            columnGap: 40,
+                            paddingLeft: 20,
+                          }}
+                        >
+                          <span></span>
 
-                      <span>Name</span>
-                    </div>
-                  </th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              {allInvestors && allInvestors.length ? (
-                <tbody>
-                  {allInvestors?.map((item, index) => (
-                    <NewsletterTableRow
-                      // addCheckboxItems={addCheckboxItems}
-                      key={index}
-                      index={index}
-                      item={item}
-                    />
-                  ))}
-
-                  {/* <tr>
-                    <td colSpan={5}>
-                      <TablePagination />
-                    </td>
-                  </tr> */}
-                </tbody>
-              ) : (
-                <tbody>
-                  <tr>
-                    <td colSpan={7}>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <div>
-                          <br />
-                          <br />
-                          <br />
-                          <h4 style={{ fontSize: "18px" }}>No Investor</h4>
-                          <br />
-                          <br />
-                          <br />
+                          <span>Name</span>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              )}
-            </table>
+                      </th>
+                      <th style={{ textAlign: "center" }}>Audience</th>
+                      <th style={{ textAlign: "center" }}>Date/status</th>
+                      <th style={{ textAlign: "center" }}></th>
+                    </tr>
+                  </thead>
+
+                  {newsletters && newsletters.length ? (
+                    <tbody>
+                      {newsletters?.map((item, index) => (
+                        <NewsletterTableRow
+                          key={index}
+                          index={index}
+                          item={item}
+                        />
+                      ))}
+                      {totalData > 10 ? (
+                        <tr>
+                          <td
+                            colSpan={7}
+                            style={{ paddingBottom: 10, paddingTop: 15 }}
+                          >
+                            <PaginationBlock
+                              handlePrev={handlePrev}
+                              handleNext={handleNext}
+                              page={page}
+                              nextPage={nextPage}
+                              totalPages={totalPages}
+                              handleFetchByPage={handleFetchByPage}
+                            />
+                          </td>
+                        </tr>
+                      ) : null}
+                    </tbody>
+                  ) : (
+                    <tbody>
+                      <tr>
+                        <td colSpan={7}>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div>
+                              <br />
+                              <br />
+                              <br />
+                              <h4 style={{ fontSize: "18px" }}>
+                                No Newsletter
+                              </h4>
+                              <br />
+                              <br />
+                              <br />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  )}
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div className="site-small-table">
-        {allInvestors?.map((item, index) => (
-          <NewsletterTableRowSmall
-            // addCheckboxItems={addCheckboxItems}
-            key={index}
-            index={index}
-            item={item}
-          />
-        ))}
+          <div className="site-small-table">
+            {newsletters?.map((item, index) => (
+              <NewsletterTableRowSmall
+                // addCheckboxItems={addCheckboxItems}
+                key={index}
+                index={index}
+                item={item}
+              />
+            ))}
 
-        {/* <div className="mt-5">
-          <TablePagination />
-        </div> */}
+            {/* <div className="mt-5">
+              <TablePagination />
+            </div> */}
 
-        {allInvestors && allInvestors.length <= 0 && (
-          <div className="error_table">
-            <br />
-            <br />
-            <p>
-              <b>No User</b>
-            </p>
-            <br />
-            <br />
+            {totalData > 10 ? (
+              <div className="mt-5">
+                <PaginationBlock
+                  handlePrev={handlePrev}
+                  handleNext={handleNext}
+                  page={page}
+                  nextPage={nextPage}
+                  totalPages={totalPages}
+                  handleFetchByPage={handleFetchByPage}
+                />
+              </div>
+            ) : null}
+
+            {newsletters && newsletters.length <= 0 && (
+              <div className="error_table">
+                <br />
+                <br />
+                <p>
+                  <b>No Investor</b>
+                </p>
+                <br />
+                <br />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 };

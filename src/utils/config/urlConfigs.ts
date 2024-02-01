@@ -14,6 +14,7 @@ const GET_BUSINESS_EXPORT_URL = "/business/export";
 const GET_INVESTORS_URL = "/investors";
 const GET_INVESTORS_EXPORT_URL = "/investors/export";
 const GET_ADMINS_URL = "/admins";
+const GET_NEWSLETTER_URL = "/newsletters";
 
 export {
   BASEURL,
@@ -26,4 +27,5 @@ export {
   GET_INVESTORS_URL,
   GET_INVESTORS_EXPORT_URL,
   GET_ADMINS_URL,
+  GET_NEWSLETTER_URL,
 };

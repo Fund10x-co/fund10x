@@ -1552,6 +1552,11 @@ input[type="checkbox"]:checked {
   width: 250px;
 }
 
+.column_text_buttons2 {
+  grid-template-columns: repeat(2, 1fr);
+  width: 200px;
+}
+
 .column_text_buttons a {
   display: flex;
   justify-content: center;
@@ -2820,10 +2825,18 @@ input[type="checkbox"]:checked {
   font-size: 17px;
   line-height: 20px;
   color: #313131;
+  margin-top: 20px;
 }
 
 .notification_details h4 {
   margin-bottom: 15px;
+}
+
+.notification_details img {
+  width: auto !important;
+  /* width: 200px !important;*/
+  height: 100px !important;
+  object-fit: contain;
 }
 
 .notification_items_contents p,
@@ -2833,7 +2846,7 @@ input[type="checkbox"]:checked {
   font-size: 14px;
   line-height: 20px;
   color: #595959;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
 }
 
 .notification_items_contents span,
@@ -2843,6 +2856,16 @@ input[type="checkbox"]:checked {
   font-size: 12.9561px;
   line-height: 18px;
   color: #9b9b9b;
+}
+
+.form-check-input[type="checkbox"].form-check-input[type="checkbox"] {
+  width: 2.5rem;
+  height: 1.5rem; /* Adjust height as needed */
+}
+
+.form-check.form-switch label {
+  margin-top: 5px;
+  margin-left: 20px;
 }
 
 @media screen and (max-width: 1300px) {
@@ -3782,6 +3805,11 @@ input[type="checkbox"]:checked {
     position: absolute;
     right: 12px;
     top: 4px;
+  }
+
+  .column_text {
+    display: flex;
+    justify-content: center;
   }
 }
 

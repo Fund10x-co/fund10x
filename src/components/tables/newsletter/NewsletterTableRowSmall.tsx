@@ -1,10 +1,12 @@
-import { Investors } from "@/types/tableTypes";
+import { newsletterType } from "@/types/types";
+import { removeFormatDate } from "@/utils/helpers/globalFunc";
 import Image from "next/image";
 import React from "react";
+import ActionButton from "./ActionButton";
 
 interface Props {
   index: number;
-  item: Investors;
+  item: newsletterType;
   // addCheckboxItems: () => {};
 }
 
@@ -21,36 +23,40 @@ const NewsletterTableRowSmall = ({ index, item }: Props) => {
         paddingRight: 16,
       }}
     >
-      <Image
-        property={"false"}
-        src={require("@/assets/img/default.png")}
-        alt=""
-        style={{
-          width: 70,
-          marginLeft: 10,
-        }}
-      />
+      {item?.imageUrl ? (
+        <Image
+          property={"false"}
+          src={item?.imageUrl}
+          alt=""
+          width={70}
+          height={70}
+          style={{
+            marginLeft: 10,
+          }}
+        />
+      ) : (
+        <Image
+          property={"false"}
+          src={require("@/assets/img/default.png")}
+          alt=""
+          style={{
+            width: 70,
+            marginLeft: 10,
+          }}
+        />
+      )}
 
       <div
         className="fasta_small_table_item_content"
         style={{ textAlign: "center", width: "100%" }}
       >
-        <h4>Investment Update</h4>
-        <p>
-          vamus. Consequat vel libero facilisis luctus enim pellentesque mauris.
-          Vestibulum malesuada gravida egestas in molestie sed. Etiam viverra
-          volutpat fames vulputate in tellus sit mauris.{" "}
-        </p>
+        <h4>{item?.title}</h4>
+        <p>{item?.description}</p>
         <div style={{ textAlign: "center" }}>
-          <p>10/11/2023</p>
-          <div>
-            <button
-              type="button"
-              className="site_button animate__animated animate__fadeInRight"
-            >
-              <span>Investor</span>
-            </button>
-          </div>
+          <p>{removeFormatDate(item.createdAt)}</p>
+        </div>
+        <div style={{ marginTop: 25 }}>
+          <ActionButton item={item} />
         </div>
       </div>
     </div>

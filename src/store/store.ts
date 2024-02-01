@@ -4,6 +4,7 @@ import alertSlice from "./alertSlice/alertSlice";
 import businessSlice from "./businessSlice/businessSlice";
 import investorSlice from "./investorSlice/investorSlice";
 import adminSlice from "./adminSlice/adminSlice";
+import newsletterSlice from "./newsletterSlice/newsletterSlice";
 
 export function makeStore() {
   return configureStore({
@@ -13,6 +14,7 @@ export function makeStore() {
       business: businessSlice,
       investor: investorSlice,
       admins: adminSlice,
+      newsletter: newsletterSlice,
     },
   });
 }

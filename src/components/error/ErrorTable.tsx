@@ -1,6 +1,7 @@
 import { getAdmins } from "@/store/adminSlice/actions";
 import { getBusiness } from "@/store/businessSlice/actions";
 import { getInvestors } from "@/store/investorSlice/actions";
+import { getNewsletters } from "@/store/newsletterSlice/actions";
 import { AppDispatch } from "@/store/store";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -25,6 +26,11 @@ const ErrorTable = ({ requestType }: ErrorTableProps) => {
     }
     if (requestType === "BUSINESS") {
       dispatch(getBusiness(`?page=${1}&limit=${10}`));
+
+      return;
+    }
+    if (requestType === "NEWSLETTER") {
+      dispatch(getNewsletters(`?page=${1}&limit=${10}`));
 
       return;
     }

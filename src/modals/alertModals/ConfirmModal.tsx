@@ -9,10 +9,12 @@ import {
   GET_ADMINS_URL,
   GET_BUSINESS_URL,
   GET_INVESTORS_URL,
+  GET_NEWSLETTER_URL,
 } from "@/utils/config/urlConfigs";
 import { getBusiness } from "@/store/businessSlice/actions";
 import { getInvestors } from "@/store/investorSlice/actions";
 import { getAdmins } from "@/store/adminSlice/actions";
+import { getNewsletters } from "@/store/newsletterSlice/actions";
 
 const ConfirmModal = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -65,6 +67,12 @@ const ConfirmModal = () => {
 
     if (modal?.type === "DELETE_ADMINS") {
       handleDeleteAdmin(modal?.payload?.id);
+
+      return;
+    }
+
+    if (modal?.type === "DELETE_NEWSLETTER") {
+      handleDeleteNewsletter(modal?.payload?.id);
 
       return;
     }
@@ -210,6 +218,57 @@ const ConfirmModal = () => {
             type: "error",
             title: "Admin Not Deleted",
             desc: "Error occurred while deleting this Admin",
+            payload: null,
+          })
+        );
+      }
+
+      closeModal();
+    } catch (error: any) {
+      setIsLoading(false);
+      dispatch(
+        setAlertPopUp({
+          status: true,
+          type: "error",
+          title: "Error",
+          desc:
+            error?.response?.data?.errors[0] ||
+            "Something's wrong, please try again",
+          payload: null,
+        })
+      );
+
+      closeModal();
+    }
+  };
+
+  const handleDeleteNewsletter = async (id: any) => {
+    try {
+      const response = await axiosAuth.delete(GET_NEWSLETTER_URL + `/${id}`);
+
+      setIsLoading(false);
+
+      // console.log("response", response);
+
+      if (response?.status === 204) {
+        dispatch(
+          setAlertPopUp({
+            status: true,
+            type: "success",
+            title: "Newsletter Deleted",
+            desc: "Newsletter has been successfully deleted!",
+            payload: null,
+          })
+        );
+
+        dispatch(getNewsletters(`?page=${page}&limit=${10}`));
+      } else {
+        dispatch(
+          setAlertPopUp({
+            status: true,
+            type: "error",
+            title: "Newsletter Not Deleted",
+            desc: "Error occurred while deleting this Newsletter",
             payload: null,
           })
         );
