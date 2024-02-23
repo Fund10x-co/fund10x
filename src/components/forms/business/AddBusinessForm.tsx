@@ -395,7 +395,16 @@ const AddBusinessForm = () => {
                 }}
               >
                 <option value="">Select type</option>
+                <option value="AI">AI</option>
                 <option value="Fintech">Fintech</option>
+                <option value="Energy">Energy</option>
+                <option value="Proptech">Proptech</option>
+                <option value="Ecommerce">Ecommerce</option>
+                <option value="Blockchain">Blockchain</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Mining">Mining</option>
+                <option value="Retail">Retail</option>
               </select>
             </div>
           </div>

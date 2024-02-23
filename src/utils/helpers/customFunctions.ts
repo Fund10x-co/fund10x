@@ -5,6 +5,17 @@ export const validEmail = (email: string) => {
   return emailReg.test(email);
 };
 
+export const addLineBreak = (text: string) => {
+  var newText = text.replace(/(?:\r\n|\r|\n)/g, "<br>");
+
+  return newText;
+};
+
+export const removeLineBreak = (text: string) => {
+  let newText = text.replace(/<br\s*[\/]?>/gi, "\n");
+  return newText;
+};
+
 export const addComma = (value: any) => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

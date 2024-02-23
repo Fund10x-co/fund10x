@@ -55,7 +55,7 @@ const AddInvestors = () => {
   return (
     <div className="section_body">
       <div className="container-fluid inner_container_small">
-        <Pageheader pageTitle="View Investor" hasArrowBack={true} />
+        <Pageheader pageTitle="Newsletter" hasArrowBack={true} />
         <div
           className="fasta-form-div card notification_details"
           style={{ margin: "auto" }}

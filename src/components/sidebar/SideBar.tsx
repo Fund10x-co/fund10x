@@ -105,9 +105,11 @@ const SideBar = () => {
               <Link
                 href="/admin/newsletter"
                 className={`has-arrow  ${
-                  ["/admin/newsletter/add", "/admin/newsletter"].includes(
-                    pathName
-                  ) && "active"
+                  [
+                    "/admin/newsletter/add",
+                    "/admin/newsletter/view",
+                    "/admin/newsletter",
+                  ].includes(pathName) && "active"
                 }`}
               >
                 <div>
