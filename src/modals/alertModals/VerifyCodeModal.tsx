@@ -177,9 +177,9 @@ const VerifyCodeModal = () => {
           // document.cookie = `user=${JSON.stringify(user)};max-age=${
           //   30 * 60
           // };path=/`;
+          router.push("/admin/investors");
 
           setTimeout(() => {
-            router.push("/admin/investors");
             setIsLoading(false);
             closeModal();
           }, 1000);

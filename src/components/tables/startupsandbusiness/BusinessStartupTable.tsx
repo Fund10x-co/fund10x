@@ -13,6 +13,7 @@ import Searchfilters from "@/components/Searchfilters";
 import {
   setAlertSmallPOPUP,
   setConfirmPopUp,
+  setDownloadModal,
   setPageLoading,
 } from "@/store/alertSlice/alertSlice";
 import { axiosAuth } from "@/utils/config/axios";
@@ -35,6 +36,7 @@ const BusinessStartupTable = () => {
     useState<boolean>(false);
   const [showBulkFilter, setShowBulkFilter] = useState<boolean>(false);
   const [checkAll, setCheckAll] = useState<boolean>(false);
+
   const [selectedItems, setSelectedItems] = useState<businessType[]>([]);
 
   const addCheckboxItems = (value: businessType) => {
@@ -178,8 +180,28 @@ const BusinessStartupTable = () => {
       if (data) {
         // console.log("here data");
         // router.push(data);
-        window.location.href = data;
-        window.location.replace(data);
+        // window.location.href = data;
+        // window.location.replace(data);
+
+        // window.open(data, "_blank", "noopener,noreferrer");
+
+        const newTab = window.open(data?.data, "_blank");
+        if (newTab) {
+          newTab.focus();
+        } else {
+          console.error("Failed to open PDF link in new tab.");
+        }
+
+        // let fileName = "fund10x" + Date.now() + "." + value;
+
+        // const link = document.createElement("a");
+        // link.href = data;
+        // // link.download = fileName;
+        // link.target = "_blank";
+        // link.rel = "noopener noreferrer";
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
       }
     } catch (error: any) {
       console.log("error", error?.response?.data?.errors);

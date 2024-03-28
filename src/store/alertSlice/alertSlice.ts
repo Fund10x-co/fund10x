@@ -34,6 +34,12 @@ const initialState = {
     type: "",
     message: "",
   },
+
+  downloadModal: {
+    status: false,
+    type: "",
+    payload: null,
+  },
 };
 
 const alertSlice = createSlice({
@@ -59,6 +65,10 @@ const alertSlice = createSlice({
     setAlertSmallPOPUP: (state, { payload }) => {
       state.alertSmallPOPUP = payload;
     },
+
+    setDownloadModal: (state, { payload }) => {
+      state.downloadModal = payload;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -69,6 +79,7 @@ export const {
   setVerifyPopUp,
   setPageLoading,
   setAlertSmallPOPUP,
+  setDownloadModal,
 } = alertSlice.actions;
 
 export default alertSlice.reducer;

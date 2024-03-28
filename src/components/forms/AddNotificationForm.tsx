@@ -33,6 +33,7 @@ const AddNotificationForm = () => {
   const [uploadedSignature, setUploadedSignature] = useState<any | null>(null);
   const [uploadedSignaturePreview, setUploadedSignaturePreview] =
     useState<string>("");
+  const [convertedImageURL, setConvertedImageURL] = useState<any[]>([]);
 
   const resetFields = () => {
     setImageUrl("");
@@ -46,6 +47,7 @@ const AddNotificationForm = () => {
     setUploadedSignaturePreview("");
     setSelectedFile(null);
     setUploadedSignature(null);
+    setConvertedImageURL([]);
   };
 
   // const [receipients] = useState<string[]>(["Users", "Riders", "Fleet owners"]);
@@ -196,78 +198,112 @@ const AddNotificationForm = () => {
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      setPageLoading({
-        status: true,
-        message: "Adding newsletter...",
-      })
-    );
+    // dispatch(
+    //   setPageLoading({
+    //     status: true,
+    //     message: "Adding newsletter...",
+    //   })
+    // );
 
-    let payload = {
-      audience: audience,
-      title: title,
-      description: message,
-      link: link,
-      textContent: `<div>${message}</div>`,
-      htmlContent: `<div>${message}</div>`,
-      imageUrl:
-        "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-      // sent: isOn,
-    };
+    if (convertedImageURL?.length <= 0) {
+      let allConverts: any = [];
+      const formData = new FormData();
 
-    try {
-      const response = await axiosAuth.post(
-        GET_NEWSLETTER_URL + "/send",
-        payload
-      );
+      let files = [selectedFile, uploadedSignature];
 
-      if (response?.data?.error === false) {
-        dispatch(
-          setAlertPopUp({
-            status: true,
-            type: "success",
-            title: "Newsletter Added",
-            desc: "Newsletter have been added successfully!",
-            payload: null,
-          })
-        );
+      // allFiles?.forEach((file) => {
+      //   formData.append("file", file);
+      // })
 
-        dispatch(getNewsletters(`?page=${1}&limit=${10}`));
+      console.log("files", files);
+      const url = "https://api.cloudinary.com/v1_1/hzxyensd5/image/upload";
 
-        resetFields();
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        formData.append("file", file);
+        formData.append("upload_preset", "docs_upload_example_us_preset");
 
-        // router.push("/admin/newsletter");
-      } else {
-        dispatch(
-          setAlertPopUp({
-            status: true,
-            type: "error",
-            title: "Admin Not Added",
-            desc: "Error occurred while adding Admin",
-            payload: null,
-          })
-        );
-      }
-    } catch (error: any) {
-      // console.log("error", error);
-      let message = error?.response?.data?.errors[0];
-      dispatch(
-        setAlertPopUp({
-          status: true,
-          type: "error",
-          title: "Error",
-          desc: message || "Something's wrong, please try again",
-          payload: null,
+        fetch(url, {
+          method: "POST",
+          body: formData,
         })
-      );
+          .then((response) => {
+            return response.text();
+          })
+          .then((data) => {
+            allConverts.push(data);
+            console.log("data", data);
+          });
+      }
+
+      setConvertedImageURL(allConverts);
     }
 
-    dispatch(
-      setPageLoading({
-        status: false,
-        message: "",
-      })
-    );
+    // let payload = {
+    //   audience: audience,
+    //   title: title,
+    //   description: message,
+    //   link: link,
+    //   textContent: `<div>${message}</div>`,
+    //   htmlContent: `<div>${message}</div>`,
+    //   imageUrl:
+    //     "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+    //   // sent: isOn,
+    // };
+
+    // try {
+    //   const response = await axiosAuth.post(
+    //     GET_NEWSLETTER_URL + "/send",
+    //     payload
+    //   );
+
+    //   if (response?.data?.error === false) {
+    //     dispatch(
+    //       setAlertPopUp({
+    //         status: true,
+    //         type: "success",
+    //         title: "Newsletter Added",
+    //         desc: "Newsletter have been added successfully!",
+    //         payload: null,
+    //       })
+    //     );
+
+    //     dispatch(getNewsletters(`?page=${1}&limit=${10}`));
+
+    //     resetFields();
+
+    //     // router.push("/admin/newsletter");
+    //   } else {
+    //     dispatch(
+    //       setAlertPopUp({
+    //         status: true,
+    //         type: "error",
+    //         title: "Admin Not Added",
+    //         desc: "Error occurred while adding Admin",
+    //         payload: null,
+    //       })
+    //     );
+    //   }
+    // } catch (error: any) {
+    //   // console.log("error", error);
+    //   let message = error?.response?.data?.errors[0];
+    //   dispatch(
+    //     setAlertPopUp({
+    //       status: true,
+    //       type: "error",
+    //       title: "Error",
+    //       desc: message || "Something's wrong, please try again",
+    //       payload: null,
+    //     })
+    //   );
+    // }
+
+    // dispatch(
+    //   setPageLoading({
+    //     status: false,
+    //     message: "",
+    //   })
+    // );
   };
 
   // console.log("message", message);
