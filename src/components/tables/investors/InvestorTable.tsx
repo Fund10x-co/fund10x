@@ -178,8 +178,15 @@ const InvestorTable = () => {
       if (data) {
         // console.log("here data");
         // router.push(data);
-        window.location.href = data;
-        window.location.replace(data);
+        // window.location.href = data;
+        // window.location.replace(data);
+
+        const newTab = window.open(data?.data, "_blank");
+        if (newTab) {
+          newTab.focus();
+        } else {
+          console.error("Failed to open PDF link in new tab.");
+        }
       }
     } catch (error: any) {
       console.log("error", error?.response?.data?.errors);
