@@ -75,3 +75,110 @@ export function base64ToImage(base64String: string, fileName: string): void {
   // Releasing the object URL resource
   urlCreator.revokeObjectURL(imageUrl);
 }
+
+export const removeDuplicate = (arr: any) => {
+  return arr
+    .map((e: any) => e["original_filename"])
+    .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
+    .filter((obj: any) => arr[obj])
+    .map((e: any) => arr[e]);
+};
+
+export const htmlEmailTemp = (
+  image: any,
+  signantureImage: any,
+  title: string,
+  des: string
+) => {
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+      </style>
+    </head>
+  
+    <body>
+      <div
+        class="boatWrapper"
+        style="
+          font-family: 'DM Sans', sans-serif;
+          width: 100%;
+          max-height: max-content;
+          max-width: 680px;
+          margin: auto;
+          box-sizing: border-box;
+          position: relative;
+          background: #fff;
+        "
+      >
+        <table
+          width="100%"
+          cellspacing="0"
+          style="margin: 0 auto; max-width: 680px; padding: 20px 80px"
+        >
+          <tbody>
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <div style="margin-top: 50px; margin-bottom: 30px">
+                  <img class="tripBoat" src="${image}" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <br />
+                <h2 class="headerTitle" style="font-size: 20px">${title}</h2>
+              </td>
+            </tr>
+  
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <p class="__">
+                ${des}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <p class="__">
+                Happy investing!
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <p class="__">
+                
+FUND10X Investment Team.
+                </p>
+              </td>
+            </tr>
+  
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <div style="margin-top: 50px">
+                  <hr style="color: #dcdcdc !important; width: 100%" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td cellpadding="0" cellspacing="0">
+                <div class="footerDiv">
+                  <img
+                    src="${signantureImage}"
+                    height="35"
+                    style="height: 38px"
+                    class="CToWUd"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </body>
+  </html>`;
+};
