@@ -136,7 +136,7 @@ const InvestorTable = () => {
 
       let onlyIds = selectedItems?.map((item) => item?._id);
 
-      console.log("onlyIds", String(onlyIds));
+      // console.log("onlyIds", String(onlyIds));
 
       dispatch(
         setConfirmPopUp({
@@ -156,7 +156,7 @@ const InvestorTable = () => {
 
     handlefetchExport(value);
 
-    console.log("value", value);
+    // console.log("value", value);
   };
 
   const handlefetchExport = async (value: string) => {
@@ -171,7 +171,7 @@ const InvestorTable = () => {
       const response = await axiosAuth.get(
         GET_INVESTORS_EXPORT_URL + `/${value}`
       );
-      console.log("response", response?.data);
+      // console.log("response", response?.data);
 
       let data = response?.data;
 
@@ -189,7 +189,7 @@ const InvestorTable = () => {
         }
       }
     } catch (error: any) {
-      console.log("error", error?.response?.data?.errors);
+      // console.log("error", error?.response?.data?.errors);
 
       dispatch(
         setAlertSmallPOPUP({

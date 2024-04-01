@@ -38,7 +38,7 @@ const AddBusinessForm = () => {
 
   useEffect(() => {
     if (idQuery && idQuery !== "add") {
-      console.log("id", idQuery);
+      // console.log("id", idQuery);
       getCurrentItem(idQuery);
     }
   }, [idQuery, dispatch]);
@@ -173,7 +173,7 @@ const AddBusinessForm = () => {
 
     try {
       const response = await axiosAuth.post(GET_BUSINESS_URL, payload);
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response?.data?.error === false) {
         dispatch(
@@ -229,7 +229,7 @@ const AddBusinessForm = () => {
         GET_BUSINESS_URL + `/${currentItem?._id}`,
         payload
       );
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response?.data?.error === false) {
         dispatch(
@@ -289,7 +289,7 @@ const AddBusinessForm = () => {
         router.back();
       }
 
-      console.log("response", response);
+      // console.log("response", response);
     } catch (error) {
       router.back();
     }

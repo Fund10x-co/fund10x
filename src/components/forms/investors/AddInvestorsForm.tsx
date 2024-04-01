@@ -37,7 +37,7 @@ const AddInvestorsForm = () => {
 
   useEffect(() => {
     if (idQuery && idQuery !== "add") {
-      console.log("id", idQuery);
+      // console.log("id", idQuery);
       getCurrentItem(idQuery);
     }
   }, [idQuery, dispatch]);
@@ -174,7 +174,7 @@ const AddInvestorsForm = () => {
 
     try {
       const response = await axiosAuth.post(GET_INVESTORS_URL, payload);
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response?.data?.error === false) {
         dispatch(
@@ -230,7 +230,7 @@ const AddInvestorsForm = () => {
         GET_INVESTORS_URL + `/${currentItem?._id}`,
         payload
       );
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response?.data?.error === false) {
         dispatch(
@@ -290,7 +290,9 @@ const AddInvestorsForm = () => {
         router.back();
       }
 
-      console.log("response", response);
+      // if (process.env.NODE_ENV === "development") {
+      //   // console.log("response", response);
+      // }
     } catch (error) {
       router.back();
     }

@@ -111,10 +111,10 @@ const LoginForm = () => {
             })
           );
         }
-        console.log("response", response);
+        // console.log("response", response);
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", error);
         dispatch(
           setPageLoading({
             status: false,

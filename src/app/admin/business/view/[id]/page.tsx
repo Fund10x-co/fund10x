@@ -20,7 +20,7 @@ const AddInvestors = () => {
 
   useEffect(() => {
     if (idQuery && idQuery !== "add") {
-      console.log("id", idQuery);
+      // console.log("id", idQuery);
       getCurrentItem(idQuery);
     }
   }, [idQuery, dispatch]);
@@ -35,7 +35,7 @@ const AddInvestors = () => {
         router.back();
       }
 
-      console.log("response", response);
+      // console.log("response", response);
     } catch (error) {
       router.back();
     }

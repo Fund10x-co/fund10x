@@ -95,7 +95,7 @@ const ConfirmModal = () => {
   const handleDeleteBusiness = async (id: any) => {
     try {
       const response = await axiosAuth.delete(GET_BUSINESS_URL + `?ids=${id}`);
-      console.log("response", response);
+      // console.log("response", response);
 
       setIsLoading(false);
 

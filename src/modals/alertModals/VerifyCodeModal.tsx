@@ -107,13 +107,13 @@ const VerifyCodeModal = () => {
     setIsLoading(true);
 
     if (verifyPopUp.type === "CONFIRM_LOGIN") {
-      console.log(verifyPopUp.payload);
+      // console.log(verifyPopUp.payload);
       loginOTP();
 
       return;
     }
     if (verifyPopUp.type === "CONFIRM_FORGOT_PASSWORD") {
-      console.log(verifyPopUp.payload);
+      // console.log(verifyPopUp.payload);
       // forgotPasswordOTP();
 
       return;
@@ -164,7 +164,7 @@ const VerifyCodeModal = () => {
           dispatch(setToken(meta?.token));
           dispatch(setUser(user));
 
-          console.log("meta", meta);
+          // console.log("meta", meta);
 
           document.cookie = `token=${meta?.token};max-age=${
             30 * 24 * 60 * 60
@@ -200,7 +200,7 @@ const VerifyCodeModal = () => {
       })
       .catch((error) => {
         closeModal();
-        console.log("error", error);
+        // console.log("error", error);
         setIsLoading(false);
         dispatch(
           setAlertPopUp({

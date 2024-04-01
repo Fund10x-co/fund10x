@@ -51,7 +51,7 @@ const AddInvestors = () => {
     return <FullPageLoading />;
   }
 
-  console.log("currentItem", currentItem);
+  // console.log("currentItem", currentItem);
 
   const htmlString = "<p>This is some <strong>HTML</strong> content.</p>";
 

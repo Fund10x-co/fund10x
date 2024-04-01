@@ -351,7 +351,7 @@ const AddNotificationForm = () => {
     };
 
     const uRL = BASEURL + GET_NEWSLETTER_URL + "/send";
-    console.log("uRL", uRL);
+    // console.log("uRL", uRL);
 
     fetch(`${uRL}`, requestOptions)
       .then((response) => response.json())
@@ -389,7 +389,7 @@ const AddNotificationForm = () => {
           );
         }
 
-        console.log("data", data);
+        // console.log("data", data);
       })
       .catch((error) => {
         dispatch(
@@ -409,7 +409,7 @@ const AddNotificationForm = () => {
           })
         );
 
-        console.log("error", error);
+        // console.log("error", error);
       });
 
     // let payload = {

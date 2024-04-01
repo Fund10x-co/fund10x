@@ -35,7 +35,7 @@ const newsletterSlice = createSlice({
         message: "",
       };
 
-      console.log("payload", action?.payload);
+      // console.log("payload", action?.payload);
       let data: responseNewsletterWithMeta = action?.payload;
 
       if (data?.error === false) {
@@ -45,7 +45,7 @@ const newsletterSlice = createSlice({
         state.newsletterNextPage = data?.meta?.nextPage;
         state.newsletterTotalData = data?.meta?.total;
 
-        console.log("newsletters", state.newsletters);
+        // console.log("newsletters", state.newsletters);
       } else {
         state.newsletters = [];
       }
@@ -58,7 +58,7 @@ const newsletterSlice = createSlice({
       };
 
       state.newsletters = [];
-      console.log("error", action);
+      // console.log("error", action);
       handleAxiosReduxError(action?.payload);
     });
   },

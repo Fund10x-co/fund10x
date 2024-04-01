@@ -29,7 +29,7 @@ const AddAdminForm = () => {
 
   useEffect(() => {
     if (idQuery && idQuery !== "add") {
-      console.log("id", idQuery);
+      // console.log("id", idQuery);
       getCurrentItem(idQuery);
     }
   }, [idQuery, dispatch]);
@@ -157,7 +157,7 @@ const AddAdminForm = () => {
         GET_ADMINS_URL + `/${currentItem?._id}`,
         payload
       );
-      console.log("response", response);
+      // console.log("response", response);
 
       if (response?.data?.error === false) {
         dispatch(
