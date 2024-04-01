@@ -70,7 +70,6 @@ const NewsletterTable = () => {
       ) : (
         <>
           <div className="site-large-table">
-            {/* {selectedItems} */}
             <div className="site-table animate__animated animate__fadeInRight">
               <div className="table-responsive">
                 <table className="table mb-0">
@@ -157,17 +156,8 @@ const NewsletterTable = () => {
 
           <div className="site-small-table">
             {newsletters?.map((item, index) => (
-              <NewsletterTableRowSmall
-                // addCheckboxItems={addCheckboxItems}
-                key={index}
-                index={index}
-                item={item}
-              />
+              <NewsletterTableRowSmall key={index} index={index} item={item} />
             ))}
-
-            {/* <div className="mt-5">
-              <TablePagination />
-            </div> */}
 
             {totalData > 10 ? (
               <div className="mt-5">

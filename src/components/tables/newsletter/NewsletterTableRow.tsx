@@ -3,6 +3,8 @@ import Image from "next/image";
 import React from "react";
 import ActionButton from "./ActionButton";
 import { removeFormatDate } from "@/utils/helpers/globalFunc";
+import ImageWithFallback from "@/components/block/ImageWithFallback";
+import { formateDayMonth } from "@/utils/helpers/customFunctions";
 
 interface Props {
   index: number;
@@ -24,17 +26,17 @@ const NewsletterTableRow = ({ index, item }: Props) => {
               }}
             >
               {item?.imageUrl ? (
-                <Image
-                  property={"false"}
+                <ImageWithFallback
+                  // layout="fill"
                   src={item?.imageUrl}
-                  alt=""
+                  fallbackSrc={require("@/assets/img/sample.png")}
                   width={72}
                   height={72}
                 />
               ) : (
                 <Image
                   property={"false"}
-                  src={require("@/assets/img/default.png")}
+                  src={require("@/assets/img/sample.png")}
                   alt=""
                   width={72}
                   height={72}
@@ -55,7 +57,13 @@ const NewsletterTableRow = ({ index, item }: Props) => {
                     fontWeight: 300,
                   }}
                 >
-                  {item?.description}
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: `<div>${item?.textContent} </div>`,
+                    }}
+                    style={{ margin: 0 }}
+                  ></p>
+                  {/* {item?.textContent} */}
                 </div>
               </div>
             </div>
@@ -85,7 +93,7 @@ const NewsletterTableRow = ({ index, item }: Props) => {
               textAlign: "center",
             }}
           >
-            {removeFormatDate(item.createdAt)}
+            {formateDayMonth(item.createdAt)}
           </p>
           <p
             style={{

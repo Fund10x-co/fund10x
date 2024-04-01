@@ -14,6 +14,7 @@ import FullPageLoading from "@/components/loading/FullPageLoading";
 import { removeFormatDate } from "@/utils/helpers/globalFunc";
 import Image from "next/image";
 import HTMLToString from "@/components/block/HTMLToString";
+import ImageWithFallback from "@/components/block/ImageWithFallback";
 
 const AddInvestors = () => {
   const router = useRouter();
@@ -50,6 +51,8 @@ const AddInvestors = () => {
     return <FullPageLoading />;
   }
 
+  console.log("currentItem", currentItem);
+
   const htmlString = "<p>This is some <strong>HTML</strong> content.</p>";
 
   return (
@@ -81,12 +84,12 @@ const AddInvestors = () => {
               </div>
             </div>
 
-            <div style={{ textAlign: "left" }}>
+            {/* <div style={{ textAlign: "left" }}>
               {currentItem?.imageUrl ? (
-                <Image
-                  property={"false"}
+                <ImageWithFallback
+                  // layout="fill"
                   src={currentItem?.imageUrl}
-                  alt=""
+                  fallbackSrc={require("@/assets/img/sample.png")}
                   width={70}
                   height={70}
                   style={{
@@ -96,7 +99,7 @@ const AddInvestors = () => {
               ) : (
                 <Image
                   property={"false"}
-                  src={require("@/assets/img/default.png")}
+                  src={require("@/assets/img/sample.png")}
                   alt=""
                   style={{
                     width: 70,
@@ -107,12 +110,15 @@ const AddInvestors = () => {
             </div>
 
             <h4>{currentItem?.title}</h4>
-            <p>{currentItem?.description}</p>
-            <div>
-              {/* <label htmlFor="">Link</label>
-              <br /> */}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: `<div>${currentItem?.textContent} </div>`,
+              }}
+            ></p> */}
+            {/* <div>
+             
               <a href={currentItem?.link}>{currentItem?.link}</a>
-            </div>
+            </div> */}
 
             <div style={{ marginTop: 20 }}>
               <HTMLToString htmlString={currentItem?.htmlContent} />

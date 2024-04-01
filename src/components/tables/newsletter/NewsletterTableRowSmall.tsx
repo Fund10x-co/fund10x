@@ -3,6 +3,7 @@ import { removeFormatDate } from "@/utils/helpers/globalFunc";
 import Image from "next/image";
 import React from "react";
 import ActionButton from "./ActionButton";
+import ImageWithFallback from "@/components/block/ImageWithFallback";
 
 interface Props {
   index: number;
@@ -24,10 +25,10 @@ const NewsletterTableRowSmall = ({ index, item }: Props) => {
       }}
     >
       {item?.imageUrl ? (
-        <Image
-          property={"false"}
+        <ImageWithFallback
+          // layout="fill"
           src={item?.imageUrl}
-          alt=""
+          fallbackSrc={require("@/assets/img/sample.png")}
           width={70}
           height={70}
           style={{
@@ -51,7 +52,11 @@ const NewsletterTableRowSmall = ({ index, item }: Props) => {
         style={{ textAlign: "center", width: "100%" }}
       >
         <h4>{item?.title}</h4>
-        <p>{item?.description}</p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `<div>${item?.textContent} </div>`,
+          }}
+        ></p>
         <div style={{ textAlign: "center" }}>
           <p>{removeFormatDate(item.createdAt)}</p>
         </div>

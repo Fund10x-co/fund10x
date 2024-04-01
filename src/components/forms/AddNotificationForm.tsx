@@ -2,16 +2,16 @@
 
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BiCloudUpload } from "react-icons/bi";
 
 import { BiX } from "react-icons/bi";
 import { setAlertPopUp, setPageLoading } from "@/store/alertSlice/alertSlice";
 import { axiosAuth } from "@/utils/config/axios";
-import { GET_NEWSLETTER_URL } from "@/utils/config/urlConfigs";
+import { BASEURL, GET_NEWSLETTER_URL } from "@/utils/config/urlConfigs";
 import { useRouter } from "next/navigation";
 import { getNewsletters } from "@/store/newsletterSlice/actions";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch, RootState } from "@/store/store";
 import {
   addLineBreak,
   htmlEmailTemp,
@@ -21,6 +21,7 @@ import {
 
 const AddNotificationForm = () => {
   const router = useRouter();
+  const { token } = useSelector((state: RootState) => state.oauth);
 
   const manyImage = useRef<HTMLInputElement>(null);
   const signatureImage = useRef<HTMLInputElement>(null);
@@ -329,71 +330,153 @@ const AddNotificationForm = () => {
       title,
       message
     );
-    let payload = {
-      audience: audience,
-      title: title,
-      link: link,
-      textContent: `<div>${message}</div>`,
-      htmlContent: String(newHTMLDiv),
-      imageUrl: imageCovtURL,
-      signatureImageUrl: sigCovtURL,
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    const formdata = new FormData();
+
+    formdata.append("audience", audience);
+    formdata.append("title", title);
+    formdata.append("link", link);
+    formdata.append("textContent", `<div>${message}</div>`);
+    formdata.append("htmlContent", String(newHTMLDiv));
+    formdata.append("imageUrl", imageCovtURL);
+    formdata.append("signatureImageUrl", sigCovtURL);
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
     };
 
-    console.log("payload", payload);
+    const uRL = BASEURL + GET_NEWSLETTER_URL + "/send";
+    console.log("uRL", uRL);
 
-    try {
-      const response = await axiosAuth.post(
-        GET_NEWSLETTER_URL + "/send",
-        payload
-      );
-
-      if (response?.data?.error === false) {
+    fetch(`${uRL}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
         dispatch(
-          setAlertPopUp({
-            status: true,
-            type: "success",
-            title: "Newsletter Added",
-            desc: "Newsletter have been added successfully!",
-            payload: null,
+          setPageLoading({
+            status: false,
+            message: "",
           })
         );
 
-        dispatch(getNewsletters(`?page=${1}&limit=${10}`));
+        if (data?.error === false) {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "success",
+              title: "Newsletter Added",
+              desc: "Newsletter have been added successfully!",
+              payload: null,
+            })
+          );
 
-        resetFields();
+          dispatch(getNewsletters(`?page=${1}&limit=${10}`));
 
-        // router.push("/admin/newsletter");
-      } else {
+          resetFields();
+        } else {
+          dispatch(
+            setAlertPopUp({
+              status: true,
+              type: "error",
+              title: "Newsletter Not Added",
+              desc: "Error occurred while adding newsletter",
+              payload: null,
+            })
+          );
+        }
+
+        console.log("data", data);
+      })
+      .catch((error) => {
+        dispatch(
+          setPageLoading({
+            status: false,
+            message: "",
+          })
+        );
+
         dispatch(
           setAlertPopUp({
             status: true,
             type: "error",
-            title: "Admin Not Added",
-            desc: "Error occurred while adding Admin",
+            title: "Error",
+            desc: String(error),
             payload: null,
           })
         );
-      }
-    } catch (error: any) {
-      // console.log("error", error);
-      let message = error?.response?.data?.errors[0];
-      dispatch(
-        setAlertPopUp({
-          status: true,
-          type: "error",
-          title: "Error",
-          desc: message || "Something's wrong, please try again",
-          payload: null,
-        })
-      );
-    }
 
-    dispatch(
-      setPageLoading({
-        status: false,
-        message: "",
-      })
-    );
+        console.log("error", error);
+      });
+
+    // let payload = {
+    //   audience: audience,
+    //   title: title,
+    //   link: link,
+    //   textContent: `<div>${message}</div>`,
+    //   htmlContent: String(newHTMLDiv),
+    //   imageUrl: imageCovtURL,
+    //   signatureImageUrl: sigCovtURL,
+    // };
+
+    // console.log("payload", payload);
+
+    // try {
+    //   const response = await axiosAuth.post(
+    //     GET_NEWSLETTER_URL + "/send",
+    //     payload
+    //   );
+
+    //   if (response?.data?.error === false) {
+    //     dispatch(
+    //       setAlertPopUp({
+    //         status: true,
+    //         type: "success",
+    //         title: "Newsletter Added",
+    //         desc: "Newsletter have been added successfully!",
+    //         payload: null,
+    //       })
+    //     );
+
+    //     dispatch(getNewsletters(`?page=${1}&limit=${10}`));
+
+    //     resetFields();
+
+    //     // router.push("/admin/newsletter");
+    //   } else {
+    //     dispatch(
+    //       setAlertPopUp({
+    //         status: true,
+    //         type: "error",
+    //         title: "Admin Not Added",
+    //         desc: "Error occurred while adding Admin",
+    //         payload: null,
+    //       })
+    //     );
+    //   }
+    // } catch (error: any) {
+    //   // console.log("error", error);
+    //   let message = error?.response?.data?.errors[0];
+    //   dispatch(
+    //     setAlertPopUp({
+    //       status: true,
+    //       type: "error",
+    //       title: "Error",
+    //       desc: message || "Something's wrong, please try again",
+    //       payload: null,
+    //     })
+    //   );
+    // }
+
+    // dispatch(
+    //   setPageLoading({
+    //     status: false,
+    //     message: "",
+    //   })
+    // );
   };
 
   return (

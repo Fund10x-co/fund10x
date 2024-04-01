@@ -250,29 +250,31 @@ const ConfirmModal = () => {
 
       // console.log("response", response);
 
-      if (response?.status === 204) {
-        dispatch(
-          setAlertPopUp({
-            status: true,
-            type: "success",
-            title: "Newsletter Deleted",
-            desc: "Newsletter has been successfully deleted!",
-            payload: null,
-          })
-        );
+      dispatch(
+        setAlertPopUp({
+          status: true,
+          type: "success",
+          title: "Newsletter Deleted",
+          desc: "Newsletter has been successfully deleted!",
+          payload: null,
+        })
+      );
 
-        dispatch(getNewsletters(`?page=${page}&limit=${10}`));
-      } else {
-        dispatch(
-          setAlertPopUp({
-            status: true,
-            type: "error",
-            title: "Newsletter Not Deleted",
-            desc: "Error occurred while deleting this Newsletter",
-            payload: null,
-          })
-        );
-      }
+      dispatch(getNewsletters(`?page=${page}&limit=${10}`));
+
+      // if ([200, 20] response?.status === 204) {
+
+      // } else {
+      //   dispatch(
+      //     setAlertPopUp({
+      //       status: true,
+      //       type: "error",
+      //       title: "Newsletter Not Deleted",
+      //       desc: "Error occurred while deleting this Newsletter",
+      //       payload: null,
+      //     })
+      //   );
+      // }
 
       closeModal();
     } catch (error: any) {

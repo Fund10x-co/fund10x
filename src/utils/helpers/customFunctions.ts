@@ -57,6 +57,30 @@ export const handleAxiosReduxError = (error: any) => {
   }
 };
 
+export const formateDayMonth = (dateString: string) => {
+  const date: Date = new Date(dateString);
+
+  const options: Intl.DateTimeFormatOptions = { day: "numeric", month: "long" };
+  const dayWithOrdinal: string = new Intl.DateTimeFormat(
+    "en-US",
+    options
+  ).format(date);
+
+  const formattedDate: string = dayWithOrdinal.replace(/\d{1,2}/, (day) => {
+    const dayNum: number = parseInt(day, 10);
+    const suffix: string =
+      dayNum >= 11 && dayNum <= 13
+        ? "th"
+        : { "1": "st", "2": "nd", "3": "rd" }[day.charAt(day.length - 1)] ||
+          "th";
+    return `${dayNum}${suffix}`;
+  });
+
+  const formattedDateWithYear: string = `${formattedDate}, ${date.getFullYear()}`;
+
+  return formattedDateWithYear;
+};
+
 export function base64ToImage(base64String: string, fileName: string): void {
   const base64Data = base64String.split(",")[1]; // Remove the header
   const byteCharacters = atob(base64Data); // Decode base64 string

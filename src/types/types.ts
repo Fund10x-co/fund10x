@@ -96,8 +96,7 @@ export type newsletterType = {
   _id: string;
   audience: string;
   title: string;
-  description: string;
-  link: string;
+  signatureImageUrl: string;
   textContent: any;
   htmlContent: any;
   imageUrl: string;
