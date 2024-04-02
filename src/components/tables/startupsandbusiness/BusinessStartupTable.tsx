@@ -185,11 +185,13 @@ const BusinessStartupTable = () => {
 
         // window.open(data, "_blank", "noopener,noreferrer");
 
-        const newTab = window.open(data?.data, "_blank");
-        if (newTab) {
-          newTab.focus();
-        } else {
-          console.error("Failed to open PDF link in new tab.");
+        if (typeof window !== "undefined") {
+          const newTab = window.open(data?.data, "_blank");
+          if (newTab) {
+            newTab.focus();
+          } else {
+            console.error("Failed to open PDF link in new tab.");
+          }
         }
 
         // let fileName = "fund10x" + Date.now() + "." + value;

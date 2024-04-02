@@ -181,11 +181,13 @@ const InvestorTable = () => {
         // window.location.href = data;
         // window.location.replace(data);
 
-        const newTab = window.open(data?.data, "_blank");
-        if (newTab) {
-          newTab.focus();
-        } else {
-          console.error("Failed to open PDF link in new tab.");
+        if (typeof window !== "undefined") {
+          const newTab = window.open(data?.data, "_blank");
+          if (newTab) {
+            newTab.focus();
+          } else {
+            console.error("Failed to open PDF link in new tab.");
+          }
         }
       }
     } catch (error: any) {
