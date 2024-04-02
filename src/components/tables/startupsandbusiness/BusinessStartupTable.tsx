@@ -225,11 +225,13 @@ const BusinessStartupTable = () => {
     );
   };
 
-  window.addEventListener("click", (e) => {
-    const dropDown = document.querySelector(".home_button_dropdown");
-    if (dropDown)
-      if (!e.composedPath().includes(dropDown)) handleCloseBulkFilter(false);
-  });
+  if (typeof window !== "undefined") {
+    window.addEventListener("click", (e) => {
+      const dropDown = document.querySelector(".home_button_dropdown");
+      if (dropDown)
+        if (!e.composedPath().includes(dropDown)) handleCloseBulkFilter(false);
+    });
+  }
 
   return (
     <>
