@@ -334,7 +334,7 @@ const AddNotificationForm = () => {
     formdata.append("audience", audience);
     formdata.append("title", title);
     formdata.append("link", link);
-    formdata.append("textContent", `<div>${message}</div>`);
+    formdata.append("textContent", `${message}`);
     formdata.append("htmlContent", String(newHTMLDiv));
     formdata.append("imageUrl", imageCovtURL);
     formdata.append("signatureImageUrl", sigCovtURL);
