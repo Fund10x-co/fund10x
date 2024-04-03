@@ -324,12 +324,7 @@ const AddNotificationForm = () => {
       })
     );
 
-    let newHTMLDiv = htmlEmailTemp(
-      selectedImage,
-      uploadedSignaturePreview,
-      title,
-      message
-    );
+    let newHTMLDiv = htmlEmailTemp(imageCovtURL, sigCovtURL, title, message);
 
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
