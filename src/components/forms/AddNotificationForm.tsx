@@ -253,13 +253,6 @@ const AddNotificationForm = () => {
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      setPageLoading({
-        status: true,
-        message: "Adding newsletter...",
-      })
-    );
-
     handleSubmitToBackend();
 
     // if (convertedImageURL?.length <= 0) {
@@ -319,10 +312,17 @@ const AddNotificationForm = () => {
 
   const handleSubmitToBackend = async () => {
     if (sigCovtURL === "") {
-      alert("please wait we convert this image");
+      alert("please wait we convert this image.. Try again in 5sec");
 
       return;
     }
+
+    dispatch(
+      setPageLoading({
+        status: true,
+        message: "Adding newsletter...",
+      })
+    );
 
     let newHTMLDiv = htmlEmailTemp(
       selectedImage,
@@ -666,6 +666,9 @@ const AddNotificationForm = () => {
                     >
                       Upload +
                     </button>
+                    <span style={{ marginLeft: 4, color: "gray" }}>
+                      {uploadedSignature?.name}
+                    </span>
                   </div>
                 </div>
                 {/* <div className="col-md-12 mt-1">

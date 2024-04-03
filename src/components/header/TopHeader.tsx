@@ -20,20 +20,22 @@ const TopHeader = () => {
       })
     );
 
-    try {
-      const response = await axiosAuth.post(LOGOUT_URL);
+    deleteCookies();
 
-      deleteCookies();
-    } catch (error: any) {
-      deleteCookies();
-    }
+    // try {
+    //   const response = await axiosAuth.post(LOGOUT_URL);
 
-    dispatch(
-      setPageLoading({
-        status: false,
-        message: "",
-      })
-    );
+    //   deleteCookies();
+    // } catch (error: any) {
+    //   deleteCookies();
+    // }
+
+    // dispatch(
+    //   setPageLoading({
+    //     status: false,
+    //     message: "",
+    //   })
+    // );
   };
 
   return (
